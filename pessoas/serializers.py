@@ -7,3 +7,7 @@ class CadastroClienteSerializer(serializers.Serializer):
     senha = serializers.CharField(write_only=True)
     cpf_cnpj = serializers.CharField()
     data_nascimento = serializers.DateField()
+    
+class LoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    senha = serializers.CharField(write_only=True)

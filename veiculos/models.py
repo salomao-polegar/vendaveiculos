@@ -1,4 +1,5 @@
 from django.db import models
+from pessoas.models import Pessoa
 
 # Create your models here.
 
@@ -11,7 +12,7 @@ class Veiculo(models.Model):
     vendido = models.BooleanField(default=False)
 
 class Venda(models.Model):
-    veiculo = models.OneToOneField(Veiculo, on_delete=models.CASCADE)
-    comprador_id_externo = models.CharField(max_length=255)  # ID vindo do serviço de auth externo
-    data = models.DateTimeField(auto_now_add=True)
+    veiculo = models.ForeignKey(to=Veiculo, on_delete=models.CASCADE)
+    comprador = models.ForeignKey(to=Pessoa, on_delete=models.CASCADE)
+    data_compra = models.DateTimeField(auto_now_add=True)
     valor = models.DecimalField(max_digits=10, decimal_places=2)

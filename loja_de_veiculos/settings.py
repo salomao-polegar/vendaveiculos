@@ -38,10 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'api',
+    'drf_yasg',
+    
+    'veiculos',
     'pessoas',
-    'drf_spectacular',
-
 ]
 
 MIDDLEWARE = [
@@ -136,10 +136,7 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer',
     
     ],
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'pessoas.auth.Auth0JSONWebTokenAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'pessoas.auth.Auth0JWTAuthentication',
+    ],    
 }
