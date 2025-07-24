@@ -15,6 +15,18 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+<<<<<<< Updated upstream:loja_de_veiculos/loja_de_veiculos/settings.py
+=======
+# Define variáveis de ambiente com defaults seguros
+env = environ.Env(
+    DEBUG=(bool, False),
+    SECRET_KEY=(str, 'changeme-please-set-env-secret'),
+    DATABASE_URL=(str, f'sqlite:///{BASE_DIR / "db.sqlite3"}'),  # fallback sqlite
+)
+
+# Lê o arquivo .env (se existir)
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+>>>>>>> Stashed changes:loja_de_veiculos/settings.py
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -37,8 +49,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'rest_framework',
+<<<<<<< Updated upstream:loja_de_veiculos/loja_de_veiculos/settings.py
     'api',
+=======
+    'drf_yasg',
+
+    'veiculos',
+>>>>>>> Stashed changes:loja_de_veiculos/settings.py
     'pessoas',
     'drf_spectacular',
 
@@ -73,6 +92,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'loja_de_veiculos.wsgi.application'
 
+<<<<<<< Updated upstream:loja_de_veiculos/loja_de_veiculos/settings.py
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
@@ -85,57 +105,37 @@ DATABASES = {
 }
 
 
+=======
+>>>>>>> Stashed changes:loja_de_veiculos/settings.py
 # Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
 ]
 
-
 # Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
-
-STATIC_URL = 'static/'
-
+STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# REST Framework
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
-    
     ],
+<<<<<<< Updated upstream:loja_de_veiculos/loja_de_veiculos/settings.py
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'pessoas.auth.Auth0JSONWebTokenAuthentication',
     ),
@@ -143,3 +143,9 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
 }
+=======
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'pessoas.auth.Auth0JWTAuthentication',
+    ],
+}
+>>>>>>> Stashed changes:loja_de_veiculos/settings.py
