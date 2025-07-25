@@ -1,17 +1,18 @@
 name: CI/CD Pipeline
 
 on:
-  pull_request:
-    branches: [ main ]
   push:
+    branches: [ main ]
+  pull_request:
     branches: [ main ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
+
     services:
       postgres:
-        image: postgres:13
+        image: postgres:14
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -25,17 +26,18 @@ jobs:
           --health-retries 5
 
     env:
+      # Simula produção no CI
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
+      DEBUG: False
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
       AUTH0_DOMAIN: ${{ secrets.AUTH0_DOMAIN }}
       AUTH0_CLIENT_ID: ${{ secrets.AUTH0_CLIENT_ID }}
       AUTH0_CLIENT_SECRET: ${{ secrets.AUTH0_CLIENT_SECRET }}
       AUTH0_CONNECTION: ${{ secrets.AUTH0_CONNECTION }}
       AUTH0_AUDIENCE: ${{ secrets.AUTH0_AUDIENCE }}
-      DEBUG: ${{ secrets.DEBUG }}
-      SECRET_KEY: ${{ secrets.SECRET_KEY }}
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
     steps:
-      - name: Checkout código
+      - name: Checkout do código
         uses: actions/checkout@v3
 
       - name: Configurar Python
@@ -48,7 +50,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Rodar migrações
+      - name: Aplicar migrações
         run: |
           python manage.py migrate
 
