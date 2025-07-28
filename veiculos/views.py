@@ -31,6 +31,12 @@ class VeiculoUpdateView(generics.UpdateAPIView):
     queryset = Veiculo.objects.all()
     serializer_class = VeiculoSerializer
     lookup_field = 'pk'
+    
+class VeiculoDeleteView(generics.DestroyAPIView):
+    permission_classes = [IsAuthenticated, IsAdminEmail]
+    queryset = Veiculo.objects.all()
+    serializer_class = VeiculoSerializer
+    lookup_field = 'pk'
 
 # 3. Listar veículos à venda
 class VeiculosAVendaListView(generics.ListAPIView):
