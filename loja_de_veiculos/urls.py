@@ -14,9 +14,6 @@ schema_view = get_schema_view(
     permission_classes=(permissions.AllowAny,),
 )
 urlpatterns = [
-    path('', lambda request: redirect('swagger/', permanent=False)),
-
     path('veiculos/', include('veiculos.urls')),
     path('pessoas/', include('pessoas.urls')),
-    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]

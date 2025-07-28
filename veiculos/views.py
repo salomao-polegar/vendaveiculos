@@ -37,6 +37,14 @@ class VeiculoDeleteView(generics.DestroyAPIView):
     queryset = Veiculo.objects.all()
     serializer_class = VeiculoSerializer
     lookup_field = 'pk'
+    
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        self.perform_destroy(instance)
+        return Response(
+            {"detail": "Veículo excluído com sucesso."},
+            status=status.HTTP_200_OK
+        )
 
 # 3. Listar veículos à venda
 class VeiculosAVendaListView(generics.ListAPIView):
@@ -46,7 +54,7 @@ class VeiculosAVendaListView(generics.ListAPIView):
 
 # 4. Listar veículos vendidos
 class VeiculosVendidosListView(generics.ListAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAdminEmail]
     queryset = Veiculo.objects.filter(vendido=True).order_by('preco')
     serializer_class = VeiculoSerializer
 
