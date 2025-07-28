@@ -1,6 +1,7 @@
-# 🚗 Sistema de Venda de Veículos - Django
+# 🚗 Sistema de Venda de Veículos - SOAT6
 
-Este projeto é uma aplicação web desenvolvida com Django que permite o gerenciamento da venda de veículos de uma concessionária. Usuários administradores autenticados podem cadastrar, visualizar e editar veícuos, e também cadastrar compradores. Usuários compradores autenticados podem visualizar veículos disponíveis e realizar a compra dos mesmos. As listagens são ordenadas por preço, do mais barato para o mais caro.
+Este projeto é uma aplicação web desenvolvida com Django que permite o gerenciamento da venda de veículos de uma concessionária. 
+
 A autenticação dos usuários - clientes e administradores - é realizada através do Auth0, que gera token de acesso para o acesso aos endpoints.
 
 ---
